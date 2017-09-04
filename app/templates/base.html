@@ -1,0 +1,12 @@
+{% extends "bootstrap/base.html"  %}
+{% block content %}
+  <div class="container-fluid">
+    {% block container %}
+    {% endblock %}
+  </div>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script src="//static.getclicky.com/js"></script>
+  <script>try{ clicky.init(101065372); }catch(e){}</script>
+{% endblock %}
