@@ -1,6 +1,3 @@
 {% extends "base.html" %}
 {% block container %}
-  {% for run_id in runs.run_ids() %}
-  <li><a href='/run/{{ run_id }}'>run {{ run_id }}</a></li>
-  {% endfor %}
 {% endblock %}

@@ -2,7 +2,29 @@
 {% block content %}
   <div class="container">
     <div class=row>
-      <div class="col-md-12">
+      <div class="col-md-2">
+        <h3>Runs</h3>
+        <a href='/'>top</a>
+        <ul>
+        {% for run_id in runs.run_ids() %}
+          {% if run is defined and run.run_id == run_id %}
+            <li>run {{ run_id }}</li>
+            <ul>
+              {% for metric_name in run.metric_names() %}
+                {% if metric is defined and metric.name == metric_name %}
+                <li>{{ metric_name }}</li>
+                {% else %}
+                <li><a href='/run/{{ run_id }}/metric/{{ metric_name }}'>{{ metric_name }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% else %}
+            <li><a href='/run/{{ run_id }}'>run {{ run_id }}</a></li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-10">
         {% block container %}
         {% endblock %}
       </div>
