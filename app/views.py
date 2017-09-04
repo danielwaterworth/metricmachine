@@ -1,25 +1,28 @@
 from app import app
+import flask
 from flask import render_template, request, abort, Response
 
 class Metric:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.samples = {}
 
     def get_data(self):
-        return self.samples
+        return list(sorted(self.samples.items()))
 
     def __setitem__(self, key, value):
         self.samples[key] = value
 
 class Run:
-    def __init__(self):
+    def __init__(self, run_id):
+        self.run_id = run_id
         self.metrics = {}
 
     def __getitem__(self, metric_name):
         return self.metrics[metric_name]
 
     def new_metric(self, metric_name):
-        metric = Metric()
+        metric = Metric(metric_name)
         self.metrics[metric_name] = metric
         return metric
 
@@ -34,8 +37,9 @@ class RunCollection:
         return self.runs[run_id]
 
     def new_run(self):
-        self.runs.append(Run())
-        return len(self.runs) - 1
+        run_id = len(self.runs)
+        self.runs.append(Run(run_id))
+        return run_id
 
     def run_ids(self):
         return range(len(self.runs))

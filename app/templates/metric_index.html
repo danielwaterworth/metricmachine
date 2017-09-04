@@ -1,3 +1,38 @@
 {% extends "base.html" %}
 {% block container %}
+  <div class=row>
+    <div class="col-md-12">
+      <h2>{{ metric.name }}</h2>
+      <div id="graph" style="width:600px;height:250px;"></div>
+    </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+  <script>
+    var path = "/run/{{ run.run_id }}/metric/{{ metric.name }}/data.json";
+    var graph = document.getElementById('graph');
+    Plotly.newPlot(graph, [{
+      x: [],
+      y: [],
+    }], {
+      margin: { t: 0 }
+    });
+    var num_samples = 0;
+    setInterval(function() {
+      Plotly.d3.json(path, function(data) {
+        var samples = data.samples.slice(num_samples);
+        num_samples = data.samples.length;
+        Plotly.extendTraces(
+          graph,
+          {
+            x: [samples.map(function(x) { return x[0]; })],
+            y: [samples.map(function(x) { return x[1]; })]
+          },
+          [0]
+        );
+      });
+    }, 1000);
+  </script>
 {% endblock %}
