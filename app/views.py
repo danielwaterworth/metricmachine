@@ -81,6 +81,6 @@ def initialize_metric(run_id, metric_name):
 def add_data(run_id, metric_name):
     run = runs[run_id]
     metric = run[metric_name]
-    for key, value in request.json['samples'].items():
+    for key, value in request.json['samples']:
         metric[key] = value
     return ''
