@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% block container %}
-  <div class=row>
-    <div class="col-md-12">
-      <h2>Run {{ run.run_id }}</h2>
-      {% for metric_name in run.metric_names() %}
-      <li><a href='/run/{{ run.run_id }}/metric/{{ metric_name }}'>{{ metric_name }}</a></li>
-      {% endfor %}
-    </div>
-  </div>
+  <h2>Run {{ run.run_id }}</h2>
+  {% for metric_name in run.metric_names() %}
+  <li><a href='/run/{{ run.run_id }}/metric/{{ metric_name }}'>{{ metric_name }}</a></li>
+  {% endfor %}
 {% endblock %}

@@ -1,8 +1,12 @@
 {% extends "bootstrap/base.html"  %}
 {% block content %}
   <div class="container">
-    {% block container %}
-    {% endblock %}
+    <div class=row>
+      <div class="col-md-12">
+        {% block container %}
+        {% endblock %}
+      </div>
+    </div>
   </div>
 {% endblock %}
 {% block scripts %}
