@@ -4,4 +4,4 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'oneuadnoehudaounelg'
 Bootstrap(app)
-from app import views
+from metricmachine.app import views

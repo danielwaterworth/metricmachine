@@ -1,4 +1,4 @@
-from app import app
+from metricmachine.app import app
 import flask
 from flask import render_template, request, abort, Response
 
